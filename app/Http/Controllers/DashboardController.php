@@ -21,6 +21,7 @@ class DashboardController extends Controller
         $produk = Produk::count();
         $supplier = Supplier::count();
         $member = Member::count();
+        $jumlah_warung = Store::count();
         $allWarung = Store::all()->pluck('nama_warung','id');
 
         $tanggalAwal = date('Y-m-01');
@@ -52,7 +53,7 @@ class DashboardController extends Controller
         }
 
         if (auth()->user()->level == 1) {
-            return view('admin.dashboard', compact('tanggalAwal','tanggalAkhir','kategori', 'produk','allWarung', 'supplier', 'member', 'tanggal_awal', 'tanggal_akhir', 'data_tanggal', 'data_pendapatan_all','namaWarungDipilih'));
+            return view('admin.dashboard', compact('tanggalAwal','tanggalAkhir','kategori', 'jumlah_warung', 'produk','allWarung', 'supplier', 'member', 'tanggal_awal', 'tanggal_akhir', 'data_tanggal', 'data_pendapatan_all','namaWarungDipilih'));
         } else {
             return view('kasir.dashboard');
         }
