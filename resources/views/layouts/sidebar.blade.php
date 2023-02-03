@@ -50,11 +50,11 @@
                     </a>
                 </li>
                 <li class="header">TRANSAKSI</li>
-                <li>
+                {{-- <li>
                     <a href="{{ route('pengeluaran.index') }}">
                         <i class="fa fa-money"></i> <span>Pengeluaran</span>
                     </a>
-                </li>
+                </li> --}}
                 <li>
                     <a href="{{ route('pembelian.index') }}">
                         <i class="fa fa-download"></i> <span>Pembelian</span>

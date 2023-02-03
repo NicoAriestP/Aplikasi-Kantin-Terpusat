@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use App\Models\Member;
 use App\Models\Pembelian;
+use App\Models\PembelianDetail;
 use App\Models\Pengeluaran;
 use App\Models\Penjualan;
 use App\Models\PenjualanDetail;
@@ -37,13 +38,14 @@ class DashboardController extends Controller
             $data_tanggal[] = (int) substr($tanggal_awal, 8, 2);
             $namaWarungDipilih = "";
             $total_penjualan = Penjualan::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('bayar');
+            $total_pembelian = Pembelian::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('bayar');
             if($request->has('id_warung')){
                 $id_warung = $request->id_warung;
                 $warungDipilih = Store::find($id_warung);
                 $namaWarungDipilih = $warungDipilih->nama_warung;
                 $total_penjualan = PenjualanDetail::where('created_at', 'LIKE', "%$tanggal_awal%")->where('id_warung','=', $id_warung)->sum('subtotal');
+                $total_pembelian = PembelianDetail::where('created_at', 'LIKE', "%$tanggal_awal%")->where('id_warung','=', $id_warung)->sum('subtotal');
             }
-            $total_pembelian = Pembelian::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('bayar');
             $total_pengeluaran = Pengeluaran::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('nominal');
 
             $pendapatan = $total_penjualan - $total_pembelian - $total_pengeluaran;

@@ -89,6 +89,6 @@ class LaporanWarungController extends Controller
         $pdf  = PDF::loadView('laporan.pdf', compact('awal', 'akhir', 'data'));
         $pdf->setPaper('a4', 'potrait');
 
-        return $pdf->stream('Laporan-pendapatan-'. date('Y-m-d-his') .'.pdf');
+        return $pdf->stream('Laporan-pendapatan-'. date('Y-m-d-his') .'.pdf',[]);
     }
 }
